@@ -1,16 +1,13 @@
 package com.rentocar.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection="license_img")
 public class LicenseImg {
 	
 	@Id
 	String licenseId;
-	
-	@ManyToOne
 	User userId;
 	String imgPath;
 	

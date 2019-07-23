@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.rentocar.model.LicenseImg;
-import com.rentocar.model.LicenseImgRepository;
 import com.rentocar.model.User;
+import com.rentocar.repository.LicenseImgRepository;
 
 @Service
 public class FileUploadService {
@@ -37,6 +37,11 @@ public class FileUploadService {
 	}
 
 	public LicenseImg getLicenseInfo(String userId) {
-		return licenseImgRepository.findByUserId(userId).orElse(new LicenseImg());
+//		return licenseImgRepository.findByUserId(userId).orElse(new LicenseImg());
+		return licenseImgRepository
+			.findAll()
+			.stream()
+			.filter(licenseImg -> licenseImg.getUser().getUserId().equals(userId))
+			.findFirst().orElse(new LicenseImg());
 	}
 }
